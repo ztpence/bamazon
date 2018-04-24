@@ -75,12 +75,37 @@ function inquireUser() {
 
 //need to tally merchandise stock
 function updateProduct(){
+    var update = stock - quantitiyNeeded;
+    connection.query('UPDATE products SET ? WHERE ?',
+    [
+        {
+            stock_quantity: update
+        },
+        {
+            id: id
+        },
 
+    ],
+    function(err, res) {
+        if (err) throw err;
+    }
+);
 }
 
 //need cusotmer merchandise total
 
 function userTotal(){
+    connection.query('SELECT price FROM products WHERE ? ',
+    {
+        id: id
+    },
+    function(err, res){
+        if (err) throw err;
+        var price = res[0].price;
+        var totoal = price * quantitiyNeeded;
+        console.log('Your total purcahse is: ' = total);
+    }
+);
 
 }
 
