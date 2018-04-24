@@ -36,13 +36,58 @@ function productForSale() {
 
 //neeed to inquirer customer with questions
 function inquireUser() {
+    inquirer.prompt([
+        { 
+            type:'input',
+            name: 'item',
+            message: 'Enter item ID you would like to buy? '
+        },
+        {
+            type: 'input',
+            name:'quantitiy',
+            message: 'How many would you like to buy?'
+        }
+    ])  //then take in customer info with and run promise function
+    .then(function(answer){    
+        connection.query('SELECT stock_quantity FROM products WHERE ?',
+        {
+            id: answer.item
+        },
+        function(err, res){
+            if (err) throw err;
+            stock = (res[0].stock_quantity);
+            quantitiyNeeded = parseInt(answer.quantity);
+            id = answer.item;
+
+            console.log('Number of items in stock: ' + stock + '\n Customer number needed: ' + quantitiyNeeded);
+            console.log(quantitiyNeeded);
+            if (quantitiyNeeded < stock) {
+                console.log('place the order');
+                updateProcuct();
+                userTotal();
+            } else{
+                console.log('This item is out of stock ');
+            }
+        }
+      );
+    });
+}
+
+//need to tally merchandise stock
+function updateProduct(){
 
 }
 
-//then take in customer info with and run promise function
-
-//need to tally merchandise stock
-
 //need cusotmer merchandise total
 
+function userTotal(){
+
+}
+
+
+
 // update invertory quantity 
+
+function updateQuantity() { 
+
+}
