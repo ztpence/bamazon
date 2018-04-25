@@ -1,14 +1,17 @@
 var inquirer = require('inquirer');
 var mysql = require('mysql');
-require('console.table')
+//require('console.table')
 
+//variables
 var id;
+var quantityNeeded
+var stock;
 
 var connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password:'',
-    database: 'bamazon'
+    database: 'bamazon_db',
 });
 
 //create connection function err to handle errors upfront
@@ -55,11 +58,11 @@ function inquireUser() {
         },
         function(err, res){
             if (err) throw err;
-            stock = (res[0].stock_quantity);
-            quantityNeeded = parseInt(answer.quantity);
-            id = answer.item;
+            stock = (res[0].stock_quantity); //stock is how many items are in available
+            quantityNeeded = parseInt(answer.quantity); // quantityNeeded is how much of the product the user would like
+            id = answer.item; 
 
-            console.log('Number of items in stock: ' + stock + '\n Customer number needed: ' + quantityNeeded);
+            console.log('Number of items in stock: ' + stock + '\nCustomer number needed: ' + quantityNeeded);
             console.log(quantityNeeded);
             if (quantityNeeded < stock) {
                 console.log('place the order');
@@ -102,8 +105,8 @@ function userTotal(){
     function(err, res){
         if (err) throw err;
         var price = res[0].price;
-        var totoal = price * quantityNeeded;
-        console.log('Your total purcahse is: ' = total);
+        var total = price * quantityNeeded;
+        console.log('Your total purcahse is: ' + total);
     }
 );
 
