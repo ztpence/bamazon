@@ -56,14 +56,14 @@ function inquireUser() {
         function(err, res){
             if (err) throw err;
             stock = (res[0].stock_quantity);
-            quantitiyNeeded = parseInt(answer.quantity);
+            quantityNeeded = parseInt(answer.quantity);
             id = answer.item;
 
-            console.log('Number of items in stock: ' + stock + '\n Customer number needed: ' + quantitiyNeeded);
-            console.log(quantitiyNeeded);
-            if (quantitiyNeeded < stock) {
+            console.log('Number of items in stock: ' + stock + '\n Customer number needed: ' + quantityNeeded);
+            console.log(quantityNeeded);
+            if (quantityNeeded < stock) {
                 console.log('place the order');
-                updateProcuct();
+                updateProduct();
                 userTotal();
             } else{
                 console.log('This item is out of stock ');
@@ -75,7 +75,7 @@ function inquireUser() {
 
 //need to tally merchandise stock
 function updateProduct(){
-    var update = stock - quantitiyNeeded;
+    var update = stock - quantityNeeded;
     connection.query('UPDATE products SET ? WHERE ?',
     [
         {
@@ -102,7 +102,7 @@ function userTotal(){
     function(err, res){
         if (err) throw err;
         var price = res[0].price;
-        var totoal = price * quantitiyNeeded;
+        var totoal = price * quantityNeeded;
         console.log('Your total purcahse is: ' = total);
     }
 );
