@@ -2,7 +2,7 @@
 
 Project source can be downloaded from <a href="https://github.com/ztpence/bamazon">https://github.com/ztpence/bamazon
 
-Author
+Author:
 Zane Pence
 
 Overview
